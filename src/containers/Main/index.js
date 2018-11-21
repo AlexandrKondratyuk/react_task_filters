@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import Radio from '../../components/UI/Radio'
+import List from '../../components/UI/List'
 import './style.scss'
 
 class Main extends Component {
@@ -15,7 +16,12 @@ class Main extends Component {
                 </nav>
 
                 <div className='Main__content'>
-                    Right
+                    <ul className='Main__content-list'>
+                        <List
+                            obj={this.props.obj}
+                            val={this.props.val}
+                        />
+                    </ul>
                 </div>
             </div>
         )
