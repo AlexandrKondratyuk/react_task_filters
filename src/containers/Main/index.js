@@ -4,16 +4,23 @@ import List from '../../components/UI/List'
 import './style.scss'
 
 class Main extends Component {
+    state = {
+        visible: true,
+        arrayFiltered: []
+    }
+
     render() {
-        console.log('MAIN ', this.props);
+        let res = filterBy(this.props.obj, 'Tag1')
+        console.log('res => ',res);
+        // console.log('MAIN ', this.props);
         return (
             <div className='Main'>
-                <nav className='Main__nav'>
+                <div className='Main__nav'>
                     <Radio
                         obj={this.props.obj}
                         val={this.props.val}
                     />
-                </nav>
+                </div>
 
                 <div className='Main__content'>
                     <ul className='Main__content-list'>
@@ -26,6 +33,17 @@ class Main extends Component {
             </div>
         )
     }
+}
+
+function filterBy(data, value) {
+    console.log('filterBy => ', data);
+
+
+    return data.filter (item =>  {
+        console.log('item =>>> ',item[1]);
+        // item[1].forEach(elem => elem.valueOf()) === value
+        return item[1].forEach(elem => (elem.valueOf() === value))
+    })
 }
 
 export default Main

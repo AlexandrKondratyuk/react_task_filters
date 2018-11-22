@@ -3,31 +3,30 @@ import Layout from './hoc/Layout'
 import Main from './containers/Main'
 import logo from './logo.svg'
 import './App.scss'
+import getData from './utils/getArrayFromJSON'
+import getUniqueValue from './utils/getUniqueValueFromArray'
 
 class App extends Component {
 
     state = {
         objFromJson: [],
-        valuesFromJson: []
+        valuesFromJson: [],
+        objCurrent: []
     }
 
     componentDidMount() {
-        let newArray = [];
-        Object.values(this.props.data).forEach((elem, index) => {
-            console.log(elem);
-            newArray = newArray.concat(elem)
-        })
+        let newArray;
+
+        newArray = getUniqueValue(getData(), 1)
         newArray = Array.from(new Set(newArray)).sort()
 
-
         this.setState({
-            objFromJson: Object.entries(this.props.data),
+            objFromJson: getData(),
             valuesFromJson: newArray
         })
     }
 
     render() {
-        console.log('valuesFromJson', this.state.valuesFromJson);
         return (
             <Layout className='App'>
                 <div className='App__wrapper'>

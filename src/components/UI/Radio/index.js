@@ -4,17 +4,11 @@ import './style.scss'
 const Radio = props => {
 
     return (
-        <div>
-            {
-                inputSearch()
-            }
-            {
-                inputAll()
-            }
-            {
-                props.val.map((elem, index) => input(elem, index))
-            }
-        </div>
+        <form>
+            {inputSearch()}
+            {inputAll()}
+            {props.val.map((elem, index) => input(elem, index))}
+        </form>
     )
 }
 

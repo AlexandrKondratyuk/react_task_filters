@@ -13,6 +13,8 @@
     border-radius: 5px;
     min-width: 200px;
     width: 30%;
+    overflow-y: scroll;
+
   }
 
   &__content {
@@ -23,6 +25,7 @@
     opacity: .8;
     min-width: 200px;
     width: 70%;
+    overflow-y: scroll;
 
     &-list {
 
