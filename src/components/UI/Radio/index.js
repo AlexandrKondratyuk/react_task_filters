@@ -1,68 +1,88 @@
-import React from 'react'
+import React, {Component} from 'react'
 import './style.scss'
 
-const Radio = props => {
+class Radio extends Component {
 
-    return (
-        <form>
-            {inputSearch()}
-            {inputAll()}
-            {props.val.map((elem, index) => input(elem, index))}
-        </form>
+    onChangeHandler = event => {
+        console.log('event from radio', event.target.value);
+        this.props.handleFilter(
+            event.target.value === 'All'
+                ? 'All'
+                : event.target.value === 'Search'
+                    ? 'Search'
+                    : event.target.value
+        )
+    }
+
+    input = (elem, index) => (
+        <label
+            key={index}
+            htmlFor='radioList'
+            className='Radio'
+        >
+            <input
+                type="radio"
+                className='Radio__input'
+                value={elem}
+                name='radioList'
+                onChange={this.onChangeHandler}
+            >
+            </input>
+            {elem}
+        </label>
     )
+
+    inputAll = () => (
+        <label
+            htmlFor='radioList'
+            className='Radio'
+        >
+            <input
+                type="radio"
+                className='Radio__input'
+                value='All'
+                name='radioList'
+                onChange={this.onChangeHandler}
+            >
+            </input>
+            All
+        </label>
+    )
+
+    inputSearch = () => (
+        <label
+            htmlFor='radioList'
+            className='Radio'
+        >
+            <input
+                type="radio"
+                className='Radio__input'
+                value='Search'
+                name='radioList'
+                onChange={this.onChangeHandler}
+            >
+            </input>
+            <input
+                type="search"
+                placeholder='Search'
+            />
+        </label>
+    )
+
+
+    render() {
+        return (
+            <div>
+                {this.inputSearch()}
+
+                {this.inputAll()}
+
+                {this.props.val.map((elem, index) => this.input(elem, index)
+                )}
+            </div>
+        )
+    }
 }
-
-const input = (elem, index) => (
-    <label
-        key={index}
-        htmlFor='radioList'
-        className='Radio'
-    >
-        <input
-            type="radio"
-            className='Radio__input'
-            value={elem}
-            name='radioList'
-        >
-        </input>
-        {elem}
-    </label>
-)
-
-const inputAll = () => (
-    <label
-        htmlFor='radioList'
-        className='Radio'
-    >
-        <input
-            type="radio"
-            className='Radio__input'
-            value='All'
-            name='radioList'
-        >
-        </input>
-        All
-    </label>
-)
-
-const inputSearch = () => (
-    <label
-        htmlFor='radioList'
-        className='Radio'
-    >
-        <input
-            type="radio"
-            className='Radio__input'
-            value='Search'
-            name='radioList'
-        >
-        </input>
-        <input
-            type="search"
-            placeholder='Search'
-        />
-    </label>
-)
 
 export default Radio
 

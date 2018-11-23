@@ -6,7 +6,7 @@ const List = props => {
     return (
         <div className='List'>
             {
-                props.obj.map(([key, value], index) => listCreator([key, value], index))
+                props.filteredObj.map(([key, value], index) => listCreator([key, value], index))
             }
         </div>
     )
