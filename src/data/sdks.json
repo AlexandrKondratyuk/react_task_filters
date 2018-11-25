@@ -1,0 +1,11 @@
+{
+  "SDK1" : ["Tag1","Tag3"],
+  "SDK2" : ["Tag4"],
+  "SDK3" : ["Tag1","Tag3","Tag5"],
+  "SDK4" : ["Tag2"],
+  "SDK5" : ["Tag3"],
+  "SDK6" : ["Tag2","Tag4"],
+  "SDK7" : ["Tag1","Tag3"],
+  "SDK8" : ["Tag1","Tag2"],
+  "SDK9" : ["Tag1","Tag5"]
+}
