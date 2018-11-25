@@ -6,9 +6,9 @@ class Radio extends Component {
         return (
             <div>
                 <form
-                    // onChange={this.props.onChange.bind(this)}
+                    className='Radio__Form'
                 >
-
+                        Radio Form
                 </form>
             </div>
         )
