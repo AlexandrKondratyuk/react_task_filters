@@ -1,4 +1,6 @@
 .Radio {
+  //input {-webkit-appearance: none; box-shadow: none !important; }
+  //input {box-shadow: none !important; }
   display: flex;
   margin-bottom: 20px;
 
@@ -6,4 +8,9 @@
     margin-right: 15px;
 
   }
+}
+
+.Search {
+  border: 0px;
+  border-radius: 9px;
 }

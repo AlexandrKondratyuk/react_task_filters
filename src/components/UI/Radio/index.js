@@ -2,16 +2,19 @@ import React, {Component} from 'react'
 import './style.scss'
 
 class Radio extends Component {
+    state = {
+        regexValue: ''
+    }
 
-    onChangeHandler = event => {
-        console.log('event from radio', event.target.value);
+    onChangeRadioHandler = event => {
         this.props.handleFilter(
-            event.target.value === 'All'
-                ? 'All'
-                : event.target.value === 'Search'
-                    ? 'Search'
-                    : event.target.value
+            event.target.value === 'Search'
+                ? this.state.regexValue
+                : event.target.value
         )
+        this.setState({
+            regexValue: event.target.value
+        })
     }
 
     input = (elem, index) => (
@@ -25,7 +28,7 @@ class Radio extends Component {
                 className='Radio__input'
                 value={elem}
                 name='radioList'
-                onChange={this.onChangeHandler}
+                // onChange={this.onChangeRadioHandler}
             >
             </input>
             {elem}
@@ -42,7 +45,6 @@ class Radio extends Component {
                 className='Radio__input'
                 value='All'
                 name='radioList'
-                onChange={this.onChangeHandler}
             >
             </input>
             All
@@ -56,15 +58,15 @@ class Radio extends Component {
         >
             <input
                 type="radio"
-                className='Radio__input'
+                className='Radio__input Search'
                 value='Search'
                 name='radioList'
-                onChange={this.onChangeHandler}
             >
             </input>
             <input
                 type="search"
                 placeholder='Search'
+                className='SearchValue'
             />
         </label>
     )
@@ -73,12 +75,18 @@ class Radio extends Component {
     render() {
         return (
             <div>
-                {this.inputSearch()}
+                <form
+                    onChange={this.onChangeRadioHandler}
+                    // onKeyDown={this.onChangeInputHandler}
+                >
+                    {this.inputSearch()}
 
-                {this.inputAll()}
+                    {this.inputAll()}
 
-                {this.props.val.map((elem, index) => this.input(elem, index)
-                )}
+                    {this.props.val.map((elem, index) => this.input(elem, index)
+                    )}
+                </form>
+
             </div>
         )
     }

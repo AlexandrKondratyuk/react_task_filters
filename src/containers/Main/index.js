@@ -1,10 +1,10 @@
 import React, {Component} from 'react'
-import Radio2 from '../../components/Radio'
 import Radio from '../../components/UI/Radio'
 import List from '../../components/UI/List'
 import arrayFromJson from '../../utils/getArrayFromJSON'
 import uniqueValue from '../../utils/getUniqueValueFromArray'
 import filterByValue from '../../utils/filterByValue'
+import filterByRegex from '../../utils/filterByRegex'
 import './style.scss'
 
 class Main extends Component {
@@ -15,19 +15,32 @@ class Main extends Component {
     }
 
 
-
     handleFilter = param => {
-        console.log('param',param);
-
-        if (this.state.arrayValuesUnique.indexOf(param) >= -1) {
+        if (this.state.arrayValuesUnique.indexOf(param) > -1) {
+            console.log(1);
             let resArr = filterByValue(this.state.arrayMain, param)
             this.setState({
                 arrayFiltered: resArr
             })
-        } else {
+        } else if (param === 'All') {
+            console.log(2);
             this.setState({
                 arrayFiltered: this.state.arrayMain
             })
+        } else {
+            console.log(3);
+            if (param === null || param === '') {
+                this.setState({
+                    arrayFiltered: this.state.arrayMain
+                })
+            } else {
+                let resArr = filterByRegex(this.state.arrayMain, param)
+                console.log('from regex param =', param);
+                console.log('3.2resArr =', resArr);
+                this.setState({
+                    arrayFiltered: resArr
+                })
+            }
         }
     }
 
@@ -67,7 +80,6 @@ class Main extends Component {
         )
     }
 }
-
 
 
 export default Main
