@@ -1,68 +1,96 @@
-import React from 'react'
+import React, {Component} from 'react'
 import './style.scss'
 
-const Radio = props => {
+class Radio extends Component {
+    state = {
+        regexValue: ''
+    }
 
-    return (
-        <form>
-            {inputSearch()}
-            {inputAll()}
-            {props.val.map((elem, index) => input(elem, index))}
-        </form>
+    onChangeRadioHandler = event => {
+        this.props.handleFilter(
+            event.target.value === 'Search'
+                ? this.state.regexValue
+                : event.target.value
+        )
+        this.setState({
+            regexValue: event.target.value
+        })
+    }
+
+    input = (elem, index) => (
+        <label
+            key={index}
+            htmlFor='radioList'
+            className='Radio'
+        >
+            <input
+                type="radio"
+                className='Radio__input'
+                value={elem}
+                name='radioList'
+                // onChange={this.onChangeRadioHandler}
+            >
+            </input>
+            {elem}
+        </label>
     )
+
+    inputAll = () => (
+        <label
+            htmlFor='radioList'
+            className='Radio'
+        >
+            <input
+                type="radio"
+                className='Radio__input'
+                value='All'
+                name='radioList'
+            >
+            </input>
+            All
+        </label>
+    )
+
+    inputSearch = () => (
+        <label
+            htmlFor='radioList'
+            className='Radio'
+        >
+            <input
+                type="radio"
+                className='Radio__input Search'
+                value='Search'
+                name='radioList'
+            >
+            </input>
+            <input
+                type="search"
+                placeholder='Search'
+                className='SearchValue'
+            />
+        </label>
+    )
+
+
+    render() {
+        return (
+            <div>
+                <form
+                    onChange={this.onChangeRadioHandler}
+                    // onKeyDown={this.onChangeInputHandler}
+                >
+                    {this.inputSearch()}
+
+                    {this.inputAll()}
+
+                    {this.props.val.map((elem, index) => this.input(elem, index)
+                    )}
+                </form>
+
+            </div>
+        )
+    }
 }
-
-const input = (elem, index) => (
-    <label
-        key={index}
-        htmlFor='radioList'
-        className='Radio'
-    >
-        <input
-            type="radio"
-            className='Radio__input'
-            value={elem}
-            name='radioList'
-        >
-        </input>
-        {elem}
-    </label>
-)
-
-const inputAll = () => (
-    <label
-        htmlFor='radioList'
-        className='Radio'
-    >
-        <input
-            type="radio"
-            className='Radio__input'
-            value='All'
-            name='radioList'
-        >
-        </input>
-        All
-    </label>
-)
-
-const inputSearch = () => (
-    <label
-        htmlFor='radioList'
-        className='Radio'
-    >
-        <input
-            type="radio"
-            className='Radio__input'
-            value='Search'
-            name='radioList'
-        >
-        </input>
-        <input
-            type="search"
-            placeholder='Search'
-        />
-    </label>
-)
 
 export default Radio
 
